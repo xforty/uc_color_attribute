@@ -1,0 +1,19 @@
+div#colors-background{
+	margin:5px;
+	background-color:#fff;
+	min-height:30px;
+}
+
+div.colors-color{
+	cursor:pointer;
+	cursor:hand;
+	height:20px;
+	width:20px;
+	float:left;
+	border:1px solid black;
+	margin:4px;
+}
+
+div#txtmsg{
+	clear:both;
+}

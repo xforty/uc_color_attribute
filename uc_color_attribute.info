@@ -1,0 +1,7 @@
+name = uc_color_attribute
+description = Ubercart Hex Value Attribute, created by Luke Tarplin, luket@ukvoipnet.com
+dependencies[] = uc_cart
+dependencies[] = uc_attribute
+dependencies[] = colorpicker
+package = Ubercart - extra
+core = 6.x
