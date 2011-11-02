@@ -44,8 +44,8 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
             drupal_add_css(drupal_get_path('module', 'uc_color_attribute') . '/css/uc_color_attribute.css');
             drupal_add_js(drupal_get_path('module', 'uc_color_attribute') . '/js/uc_color_attribute.js');
 
-            $attId = $value->aid;
-            $html = "<div id='uc-color-attribute-$attId' class='uc-color-attribute'>";
+            $attrId = $value->aid;
+            $html = "<div id='uc-color-attribute-$attrId' class='uc-color-attribute'>";
 
             // colorChoice attribute label
             $html .= '<div class="form-item"><label>' . $value->label . ':';
@@ -54,18 +54,18 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
             }
             $html .= "</label></div><!-- /form-item -->";
 
-            foreach($form['attributes'][$attId]['#options'] as $key => $value){
+            foreach($form['attributes'][$attrId]['#options'] as $key => $value){
               $kexValue = db_result(db_query("select hexValue from {uc_color_attribute} where oid = %d limit 1;",check_plain($key)));
               if(!empty($kexValue)){
-                $html .= "<div style='background-color:".$kexValue.";' class='colors-color' title='".$value."' oId='".$key."' attrId='".$attId."'></div>";
+                $html .= "<div style='background-color:".$kexValue.";' class='colors-color' title='".$value."' oId='".$key."' attrId='".$attrId."'></div>";
               }
             }
 
             $html .= "<div style='clear:both;'></div>"
-                   . "<div id='uc-color-attribute-$attId-selected' class='uc-color-attribute-selected'>&nbsp;</div>"
-                   . "</div><!-- /uc-color-attribute-$attId -->";
-            $form['attributes'][$attId]['#prefix'] = "$html<div id='uc-color-attribute-$attId-checkboxes' class='uc-color-attribute-checkboxes'>";
-            $form['attributes'][$attId]['#suffix'] = "</div><!-- /uc-color-attribute-$attId-checkboxes -->";
+                   . "<div id='uc-color-attribute-$attrId-selected' class='uc-color-attribute-selected'>&nbsp;</div>"
+                   . "</div><!-- /uc-color-attribute-$attrId -->";
+            $form['attributes'][$attrId]['#prefix'] = "$html<div id='uc-color-attribute-$attrId-checkboxes' class='uc-color-attribute-checkboxes'>";
+            $form['attributes'][$attrId]['#suffix'] = "</div><!-- /uc-color-attribute-$attrId-checkboxes -->";
           }
         }
       }
