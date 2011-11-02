@@ -54,10 +54,18 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
             }
             $html .= "</label></div><!-- /form-item -->";
 
+            // Helps us select the correct color if we are re-displaying
+            // the form...such as when there is a form error.
+            $selected_option = -1;
+            if (is_array($form_state['post']['attributes'][$attrId])) {
+              $selected_option = array_pop($form_state['post']['attributes'][$attrId]);
+            }
+
             foreach($form['attributes'][$attrId]['#options'] as $key => $value){
               $kexValue = db_result(db_query("select hexValue from {uc_color_attribute} where oid = %d limit 1;",check_plain($key)));
               if(!empty($kexValue)){
-                $html .= "<div style='background-color:".$kexValue.";' class='colors-color' title='".$value."' oId='".$key."' attrId='".$attrId."'></div>";
+                $selected_class = ($selected_option == $key) ? 'selected-color' : '';
+                $html .= "<div style='background-color:".$kexValue.";' class='colors-color $selected_class' title='".$value."' oId='".$key."' attrId='".$attrId."'></div>";
               }
             }
 
