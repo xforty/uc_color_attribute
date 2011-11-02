@@ -6,7 +6,7 @@ function uc_color_attribute_install(){
 	/* Create the Hex Value Table */
 	db_query("create table {uc_color_attribute} ( `aid` int(10) UNSIGNED NOT NULL , `oid` int(10) NOT NULL , `hexValue` varchar(7) NOT NULL , PRIMARY KEY (`oid`));");
 
-	/* Return Colour Picker Message */
+	/* Return Color Picker Message */
 	drupal_set_message("Color Picker Attribute Created.");
 	return;
 }

@@ -5,7 +5,7 @@
 function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
 	if($form_id == "uc_attribute_option_form"){
 		if($form['#parameters'][2]->name == "colorChoice"){
-			/* We have the Colour Form */
+			/* We have the Color Form */
 			if($form_state['post']['op'] == t("Submit")){
 				uc_color_attribute_save($form_state['post']['hexcolor']);
 			}
@@ -24,12 +24,12 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
 				}
 			}
 
-			/* Check Colour Picker Version Exists */
+			/* Check Color Picker Version Exists */
   			$color_field_type = (function_exists('colorpicker_2_or_later') ? 'colorpicker_' : '') .'textfield';
 			$form['hexcolor'] = array(
     				'#type' => $color_field_type,
-   				'#title' => t('Color Picker'),
-    				'#description' => t('Please select a color from the colour picker.'),
+    				'#title' => t('Color Picker'),
+            '#description' => t('Please select a color from the color picker.'),
     				'#default_value' => $default_HexColor,
 				'#attributes' => array('width' => '200')
 			);
@@ -40,7 +40,7 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
 			if(!empty($node->attributes)){
 				foreach($node->attributes as $value){
 					if($value->name == "colorChoice"){
-						/* We have a colour attribute choice */
+						/* We have a color attribute choice */
 						drupal_add_css(drupal_get_path('module', 'uc_color_attribute') . '/css/uc_color_attribute.css');
 						drupal_add_js(drupal_get_path('module', 'uc_color_attribute') . '/js/uc_color_attribute.js');
 
