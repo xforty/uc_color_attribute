@@ -45,7 +45,14 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
             drupal_add_js(drupal_get_path('module', 'uc_color_attribute') . '/js/uc_color_attribute.js');
 
             $attId = $value->aid;
-            $html = "<div id='colors-background'>";
+            $html = "<div id='uc-color-attribute-$attId' class='uc-color-attribute'>";
+
+            // colorChoice attribute label
+            $html .= '<div class="form-item"><label>' . $value->label . ':';
+            if ($value->required) {
+              $html .= '<span class="form-required" title="This field is required.">*</span>';
+            }
+            $html .= "</label></div><!-- /form-item -->";
 
             foreach($form['attributes'][$attId]['#options'] as $key => $value){
               $kexValue = db_result(db_query("select hexValue from {uc_color_attribute} where oid = %d limit 1;",check_plain($key)));
@@ -54,7 +61,9 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
               }
             }
 
-            $html .= "</div><div style='clear:both;'></div>";
+            $html .= "<div style='clear:both;'></div>"
+                   . "<div id='uc-color-attribute-$attId-selected' class='uc-color-attribute-selected'>&nbsp;</div>"
+                   . "</div><!-- /uc-color-attribute-$attId -->";
             $form['attributes'][$attId]['#prefix'] = $html;
           }
         }

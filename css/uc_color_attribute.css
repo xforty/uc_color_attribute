@@ -1,18 +1,14 @@
-div#colors-background{
+div#uc-color-attribute {
     margin:5px;
     background-color:#fff;
     min-height:30px;
 }
 
-div.colors-color{
+div.colors-color {
     cursor:pointer;
     height:20px;
     width:20px;
     float:left;
     border:1px solid black;
     margin:4px;
-}
-
-div#txtmsg{
-    clear:both;
 }
