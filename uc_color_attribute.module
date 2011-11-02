@@ -64,7 +64,8 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
             $html .= "<div style='clear:both;'></div>"
                    . "<div id='uc-color-attribute-$attId-selected' class='uc-color-attribute-selected'>&nbsp;</div>"
                    . "</div><!-- /uc-color-attribute-$attId -->";
-            $form['attributes'][$attId]['#prefix'] = $html;
+            $form['attributes'][$attId]['#prefix'] = "$html<div id='uc-color-attribute-$attId-checkboxes' class='uc-color-attribute-checkboxes'>";
+            $form['attributes'][$attId]['#suffix'] = "</div><!-- /uc-color-attribute-$attId-checkboxes -->";
           }
         }
       }
