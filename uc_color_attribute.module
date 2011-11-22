@@ -40,9 +40,8 @@ function uc_color_attribute_form_alter(&$form, &$form_state, $form_id){
       if(!empty($node->attributes)){
         foreach($node->attributes as $value){
           if($value->name == "colorChoice"){
-            /* We have a color attribute choice */
-            drupal_add_css(drupal_get_path('module', 'uc_color_attribute') . '/css/uc_color_attribute.css');
-            drupal_add_js(drupal_get_path('module', 'uc_color_attribute') . '/js/uc_color_attribute.js');
+            /* We have a color attribute choice, add js and css */
+            $form['#after_build'][] = 'uc_color_attribute_after_build';
 
             $attrId = $value->aid;
             $html = "<div id='uc-color-attribute-$attrId' class='uc-color-attribute'>";
@@ -95,6 +94,24 @@ function uc_color_attribute_save($hexValue){
       }
     }
   return;
+}
+
+/**
+ * Adds the module's js and css files.
+ *
+ * This function should be called by setting the form's #after_build property
+ * in a hook_form_alter function.  That way the js and css files are added
+ * even if the form fails validation and is reloaded from a cached form.
+ * (hook_form_alter isn't called in those cases)
+ * 
+ * @param $form
+ * @param $form_state
+ * @return Form array ($form)
+ */
+function uc_color_attribute_after_build($form, $form_state) {
+  drupal_add_css(drupal_get_path('module', 'uc_color_attribute') . '/css/uc_color_attribute.css');
+  drupal_add_js(drupal_get_path('module', 'uc_color_attribute') . '/js/uc_color_attribute.js');
+  return $form;
 }
 
 ?>
